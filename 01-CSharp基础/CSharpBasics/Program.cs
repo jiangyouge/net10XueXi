@@ -35,9 +35,9 @@ bool both = isGreater && b > 1; // 逻辑与 true
 Console.WriteLine($"isGreater: {isGreater}, both: {both}");
 
 double x = 3.9;
-int i = (int)x; // 强制转换，截断小数
-int j = Convert.ToInt32(i); // 四舍六入五成双
-Console.WriteLine($"i: {i}, j: {j}");
+int truncated = (int)x; // 强制转换，截断小数
+int rounded = Convert.ToInt32(truncated); // 四舍六入五成双
+Console.WriteLine($"truncated: {truncated}, rounded: {rounded}");
 
 string s = "123";
 int n = int.Parse(s); // 字符串 =》 整数
@@ -83,8 +83,73 @@ switch(sScore % 2)
 }
 Console.WriteLine($"第三节 end");
 
+Console.WriteLine($"第四节 start");
+for (int i = 1; i <= 5; i++)
+{
+    Console.WriteLine(i);
+}
 
+int sum = 0;
+for (int i = 1; i <= 100; i++)
+{
+    sum += i;
+}
+Console.WriteLine($"for 1到100的和为: {sum}");
 
+int sumWhile = 0;
+int count = 1;
+while (count <= 100)
+{
+    sumWhile += count;
+    count++;
+}
+Console.WriteLine($"while 1到100的和为: {sumWhile}");
 
+for (int i = 1; i <= 9; i++)
+{
+    for (int j = 1; j <= i; j++)
+    {
+        Console.Write($"{j} * {i} = {i * j}\t"); // Console.Write 输出后不换行
+    }
+}
 
+for (int i = 1; i <= 10; i++)
+{
+    if (i == 4) continue; // 跳过当前循环的剩余部分，继续下一次循环
+    if (i == 7) break; // 终止整个循环
+    Console.Write($"{i} ");
+}
 
+//动手任务
+Console.WriteLine("动手任务"); // 
+//1、把九九乘法表倒着打印。只改外层 for：从 9 开始、i >= 1、i--，内层不动。
+for (int i = 9; i >= 1; i--)
+{
+    for (int j = 1; j <= i; j++)
+    {
+        Console.Write($"{i} * {j} = {i * j}\t"); // Console.Write 输出后不换行
+    }
+    Console.WriteLine(); // 换行
+}
+//2、求 1 到 100 的偶数和（提示：if (i % 2 == 0)），结果应该是 2550。
+int sumO = 0;
+for (int i = 1; i <= 100; i++)
+{
+    if (i % 2 == 0)
+    {
+        sumO += i;
+    }
+}
+Console.WriteLine($"for 1到100的偶数和为: {sumO}");
+//3、挑战：用嵌套循环打印 5 行直角三角形星星——第 1 行 1 个，第 5 行 5 个。提示：外层 i = 1..5，内层 j = 1..i，内层用 Console.Write("*")，内层结束后 Console.WriteLine()。
+for (int i = 1; i <= 5; i++)
+{
+    for (int j = 1; j <= i; j++)
+    {
+        Console.Write("*");
+    }
+    Console.WriteLine(); // 换行
+}
+Console.WriteLine($"第四节 end");
+
+Console.WriteLine($"第五节 start");
