@@ -49,38 +49,38 @@ Console.WriteLine($"bmi: {bmi:F1}");
 Console.WriteLine($"第二节 end");
 
 Console.WriteLine($"第三节 start");
-Console.WriteLine("请输入成绩：");
-string input = Console.ReadLine() ?? "";
-int score = int.Parse(input);
+//Console.WriteLine("请输入成绩：");
+//string input = Console.ReadLine() ?? "";
+//int score = int.Parse(input);
 
-if (score >= 90)
-{
-    Console.WriteLine("等级 A");
-}
-else if (score >= 80)
-{
-    Console.WriteLine("等级 B");
-}
-else if (score >= 60)
-{
-    Console.WriteLine("等级 C");
-}
-else
-{
-    Console.WriteLine("不及格");
-}
+//if (score >= 90)
+//{
+//    Console.WriteLine("等级 A");
+//}
+//else if (score >= 80)
+//{
+//    Console.WriteLine("等级 B");
+//}
+//else if (score >= 60)
+//{
+//    Console.WriteLine("等级 C");
+//}
+//else
+//{
+//    Console.WriteLine("不及格");
+//}
 
-string sInput = Console.ReadLine() ?? "";
-int sScore = int.Parse(sInput);
-switch(sScore % 2)
-{
-    case 0:
-        Console.WriteLine($"输入：{sInput}是偶数");
-        break;
-    default:
-        Console.WriteLine($"输入：{sInput}不是偶数");
-        break;
-}
+//string sInput = Console.ReadLine() ?? "";
+//int sScore = int.Parse(sInput);
+//switch(sScore % 2)
+//{
+//    case 0:
+//        Console.WriteLine($"输入：{sInput}是偶数");
+//        break;
+//    default:
+//        Console.WriteLine($"输入：{sInput}不是偶数");
+//        break;
+//}
 Console.WriteLine($"第三节 end");
 
 Console.WriteLine($"第四节 start");
@@ -153,3 +153,61 @@ for (int i = 1; i <= 5; i++)
 Console.WriteLine($"第四节 end");
 
 Console.WriteLine($"第五节 start");
+
+int totle = Add(3, 5);
+PrintMenu("记事本");
+double myBmi = CalcBmi(73.6, 1.65);
+
+
+//方法定义
+int Add (int x, int y)
+{
+    return x + y;
+}
+void PrintMenu (string title)
+{
+    Console.WriteLine($"====={title}=====");
+
+}
+double CalcBmi (double weightKg, double heightM)
+{
+    return weightKg / (heightM * heightM);
+}
+
+//练习
+Console.WriteLine("请输入成绩：");
+string input = Console.ReadLine() ?? "100";
+int score = int.Parse(input);
+Console.WriteLine($"成绩:{score} 等级为：{Grade(score)}");
+Console.WriteLine($"Max 99 98:{Max(99, 98)}");
+Console.WriteLine($"成绩是否偶數 :{IsEven(score)}");
+string Grade(int score)
+{
+    if (score >= 90)
+    {
+        return "A";
+    }
+    else if (score >= 80)
+    {
+        return "B";
+    }
+    else if (score >= 60)
+    {
+        return "C";
+    }
+    else
+    {
+        return "不及格";
+    }
+}
+int Max(int a, int b)
+{
+    if (a > b) return a; return b;
+}
+bool IsEven(int number)
+{
+    return number % 2 == 0;
+}
+Console.WriteLine($"第五节 end");
+
+Console.WriteLine($"第六节 start");
