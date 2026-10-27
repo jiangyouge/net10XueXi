@@ -36,7 +36,7 @@ Console.WriteLine($"isGreater: {isGreater}, both: {both}");
 
 double x = 3.9;
 int truncated = (int)x; // 强制转换，截断小数
-int rounded = Convert.ToInt32(truncated); // 四舍六入五成双
+int rounded = Convert.ToInt32(x); // 四舍六入五成双
 Console.WriteLine($"truncated: {truncated}, rounded: {rounded}");
 
 string s = "123";
@@ -111,6 +111,7 @@ for (int i = 1; i <= 9; i++)
     {
         Console.Write($"{j} * {i} = {i * j}\t"); // Console.Write 输出后不换行
     }
+    Console.WriteLine(); // 换行
 }
 
 for (int i = 1; i <= 10; i++)
@@ -119,6 +120,7 @@ for (int i = 1; i <= 10; i++)
     if (i == 7) break; // 终止整个循环
     Console.Write($"{i} ");
 }
+Console.WriteLine();
 
 //动手任务
 Console.WriteLine("动手任务"); // 
@@ -154,9 +156,11 @@ Console.WriteLine($"第四节 end");
 
 Console.WriteLine($"第五节 start");
 
-int totle = Add(3, 5);
+int total = Add(3, 5);
+Console.WriteLine(total);   // 8
 PrintMenu("记事本");
 double myBmi = CalcBmi(73.6, 1.65);
+Console.WriteLine($"BMI = {myBmi:F1}");   // 27.0
 
 
 //方法定义
@@ -211,3 +215,81 @@ bool IsEven(int number)
 Console.WriteLine($"第五节 end");
 
 Console.WriteLine($"第六节 start");
+int[] scores = { 85, 92, 78, 90, 88 };
+Console.WriteLine($"数组 scores 的长度为: {scores.Length}");
+Console.WriteLine($"数组 scores 的第一个元素为: {scores[0]}");
+Console.WriteLine($"数组 scores 的最后一个元素为: {scores[scores.Length - 1]}");
+
+var names = new List<string> { "Alice", "Bob", "Charlie" };
+names.Add("David");
+names.Remove("Bob");
+Console.WriteLine($"List names 的长度为: {names.Count}");
+//foreach 和 for 的分工：挨个处理用 foreach；需要知道“第几个”或要按下标改元素用 for。
+foreach(string friend in names)
+{
+    Console.WriteLine($"List names 中的元素: {friend}");
+}
+
+var prices = new Dictionary<string, int>
+{
+    ["Apple"] = 3,
+    ["Banana"] = 2,
+    ["Orange"] = 4
+};
+prices["Banana"] = 5; // 键存在 修改键为 "Banana" 的值
+prices["Grapes"] = 6; // 键不存在 添加新的键值对
+Console.WriteLine($"Dictionary prices 的长度为: {prices.Count}");
+Console.WriteLine($"Dictionary prices 中的 Apple 的价格为: {prices["Apple"]}");
+foreach (var kvp in prices)
+{
+    Console.WriteLine($"Dictionary prices 中的元素: {kvp.Key} - {kvp.Value}");
+}
+if (prices.ContainsKey("Orange"))
+{
+    Console.WriteLine($"Dictionary prices 中包含键 'Orange'");
+}
+else
+{
+    Console.WriteLine($"Dictionary prices 中不包含键 'Orange'");
+}
+
+//动手任务
+Console.WriteLine($"任务1：");
+var fruits = new List<string> {  };
+fruits.Add("Apple");
+fruits.Add("Banana");
+fruits.Add("Orange");
+fruits.Remove("Banana");
+foreach (string fruit in fruits)
+{
+    Console.WriteLine($"List fruits 中的元素: {fruit}");
+}
+Console.WriteLine($"任务2：");
+var courseScores = new Dictionary<string, int>
+{
+    ["Math"] = 95,
+    ["English"] = 88,
+    ["Science"] = 92
+};
+foreach (var kvp in courseScores)
+{
+    Console.WriteLine($"课程: {kvp.Key}；成绩：{kvp.Value}；");
+}
+if (courseScores.ContainsKey("History"))
+{
+    Console.WriteLine($"课程 History 的成绩为: {courseScores["History"]}");
+}
+else
+{
+    Console.WriteLine($"课程 History 不存在");
+}
+Console.WriteLine($"任务3：");
+for(int i = 0; i < scores.Length; i++)
+{
+    Console.WriteLine($"第 {i + 1} 个成绩为: {scores[i]}");
+}
+Console.WriteLine($"第六节 end");
+
+Console.WriteLine($"第七节 start");
+
+
