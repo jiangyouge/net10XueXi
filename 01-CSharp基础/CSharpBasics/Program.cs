@@ -291,5 +291,40 @@ for(int i = 0; i < scores.Length; i++)
 Console.WriteLine($"第六节 end");
 
 Console.WriteLine($"第七节 start");
+string text = "     Hello, C# World  C# !      ";
+Console.WriteLine($"{text.Trim()}");    // 去掉首尾空格 
+Console.WriteLine($"{text.Trim().ToUpper()}"); // 去掉首尾空格再转为大写
+Console.WriteLine($"{text.Trim().ToLower()}"); // 去掉首尾空格再转为小写
+Console.WriteLine($"{text.Contains("C#")}"); // 判断是否包含子字符串
+Console.WriteLine($"{text.Replace("C#", "JavaScript")}"); // 替换子字符串
+Console.WriteLine($"{text.Length}"); //    长度
 
+string sentence = "苹果 香蕉 普通";
+string[] words = sentence.Split(' '); // 按空格分割字符串
+Console.WriteLine($"分割后的单词数量: {words.Length}");
+Console.WriteLine($"分割后的单词: {string.Join(", ", words)}"); // 使用 Join 方法将数组元素连接为字符串
+Console.WriteLine($": {words[1]}"); // 访问分割后的单词数组中的第二个元素
+
+string userName = "小明";
+Console.WriteLine($"欢迎 {userName} 来到 C# 世界！今年是 {DateTime.Now.Year} 年"); // 字符串插值
+
+//动手任务
+Console.WriteLine($"任务1：");
+//string str1 = "  C# is a powerful programming language  !";
+//string[] str1s = str1.Split(' ');
+//Console.WriteLine($"分割后的单词数量: {str1s.Length}");
+Console.WriteLine("请输入：I love C# very much");
+string englishLine = Console.ReadLine() ?? "";
+string[] englishWords = englishLine.Split(' ');
+Console.WriteLine($"分割后的单词数量: {englishWords.Length}");
+
+Console.WriteLine("请输入：我今天很开心!");
+string originalSentence = Console.ReadLine() ?? "";
+Console.WriteLine($"原始字符串: {originalSentence}");
+Console.WriteLine($"我换成你: {originalSentence.Replace("我", "你")}");
+
+Console.WriteLine("请输入：小明");
+string inputName = Console.ReadLine() ?? "";
+Console.WriteLine($"欢迎 {inputName} 来到 C# 世界！（共{inputName.Length} 个字）");
+Console.WriteLine($"第七节 end");
 
