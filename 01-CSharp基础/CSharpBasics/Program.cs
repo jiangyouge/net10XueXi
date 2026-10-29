@@ -62,6 +62,34 @@ Console.WriteLine($"价格限制 book1.Price -5m ：{book1.GetInfo()}");
 
 Console.WriteLine($"第九节 end");
 
+Console.WriteLine($"第十节 start");
+var animals = new List<Animal>
+{
+    new Dog("Buddy"),
+    new Cat("Whiskers"),
+    new Dog("Max"),
+    new Cat("Luna"),
+    new Bird("Tweety")
+};
+foreach (var animal in animals)
+{
+    animal.speak();
+}
+Animal generic = new Animal("UnKnown");
+generic.speak();
+
+var vehicles = new List<Vehicle>
+{
+    new Car("Toyota"),
+    new Bike("Yamaha")
+};
+foreach (var vehicle in vehicles)
+{
+    vehicle.Describe();
+}
+
+Console.WriteLine($"第十节 end");
+
 public class Person
 {
     public string Name { get; set; }
@@ -162,5 +190,82 @@ public class Account
         }
         _balance -= amount;
         return true; // 提款成功
+    }
+}
+public class Animal
+{
+    public string Name { get; }
+    public int Age { get; set; }
+    public Animal(string name)
+    {
+        Name = name;
+    }
+    public virtual void speak()
+    {
+        Console.WriteLine($"{Name} makes a sound.");
+    }
+}
+public class Dog : Animal // 继承自Animal类
+{
+    public Dog(string name) : base(name) // 调用基类构造函数
+    {
+    }
+    public override void speak() // 重写基类的speak方法
+    {
+        Console.WriteLine($"{Name} barks for Dog.");
+    }
+}
+public class Cat : Animal // 继承自Animal类
+{
+    public Cat(string name) : base(name) // 调用基类构造函数
+    {
+    }
+    public override void speak() // 重写基类的speak方法
+    {
+        Console.WriteLine($"{Name} meows for Cat.");
+    }
+}
+public class Bird : Animal
+{
+    public Bird(string name) : base(name)
+    {
+    }
+    public override void speak()
+    {
+        Console.WriteLine($"{Name} chirps for Bird.");
+    }
+}
+public class Vehicle
+{
+    public string Name { get; set; }
+    public Vehicle(string name)
+    {
+        Name = name;
+    }
+    public virtual void Describe()
+    {
+        Console.WriteLine($"{Name} is a vehicle.");
+    }
+}
+public class Car : Vehicle
+{
+    public Car(string name) : base(name)
+    {
+    }
+    public override void Describe()
+    {
+        base.Describe(); // 调用基类的Describe方法
+        Console.WriteLine($"{Name} have 4 wheels.");
+    }
+}
+public class Bike : Vehicle
+{
+    public Bike(string name) : base(name)
+    {
+    }
+    public override void Describe()
+    {
+        base.Describe(); // 调用基类的Describe方法
+        Console.WriteLine($"{Name} have 2 wheels.");
     }
 }
