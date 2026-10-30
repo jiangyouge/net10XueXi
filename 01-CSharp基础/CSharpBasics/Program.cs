@@ -112,6 +112,114 @@ foreach (IPrintable printable in printables)
 }
 Console.WriteLine($"第十一节 end");
 
+Console.WriteLine($"第十二节 start");
+try
+{
+    int number = int.Parse("NotANumber");
+    Console.WriteLine($"Parsed number: {number}");
+}
+catch (FormatException)
+{
+    Console.WriteLine("FormatException: Failed to parse the number.");
+}
+catch (Exception ex) // Exception 是所有异常的基类
+{
+    Console.WriteLine($"Exception: {ex.Message}");
+}
+finally
+{
+    Console.WriteLine("Finally block executed.");
+}
+try
+{
+    int number = int.Parse("123");
+    Console.WriteLine($"Parsed number: {number}");
+}
+catch (FormatException)
+{
+    Console.WriteLine("FormatException: Failed to parse the number.");
+}
+finally
+{
+    Console.WriteLine("Finally block executed after successful parse.");
+}
+
+try
+{
+    int zero = 0;
+    int result = 10 / zero; // This will throw DivideByZeroException
+    Console.WriteLine($"10 / zero = Result: {result}");
+}
+catch (DivideByZeroException ex)
+{
+    Console.WriteLine($"DivideByZeroException: Cannot divide by zero. {ex.Message}");
+}
+try
+{
+    string input = Console.ReadLine() ?? "";
+    var number = int.Parse(input);   // 输入 abc 会抛 FormatException
+    Console.WriteLine($"转换成功：{number}");
+}
+catch (FormatException)
+{
+    Console.WriteLine("FormatException: Failed to parse the number.");
+}
+try
+{
+    string input = Console.ReadLine() ?? "";
+
+    if (int.TryParse(input, out int number)) // TryParse 返回 bool； out int number 是“顺带把结果放进 number”
+    {
+        Console.WriteLine($"转换成功：{number}");
+    }
+    else
+    {
+        Console.WriteLine("不是数字，请重输");
+    }
+}
+finally
+{
+    Console.WriteLine("Finally block executed for TryParse.");
+}
+
+bool TryDivide(int a, int b, out double result)
+{
+    if (b == 0)
+    {
+        result = 0; // 设置默认值
+        return false; // 返回 false 表示失败
+    }
+    result = (double)a / b;
+    return true; // 返回 true 表示成功
+
+}
+if (TryDivide(10, 2, out double r1))
+{
+    Console.WriteLine($"10 / 2 = {r1}");
+}
+else
+{
+    Console.WriteLine("r1 failed.");
+}
+if (TryDivide(10, 0, out double r2))
+{
+    Console.WriteLine($"10 / 0 = {r2}");
+}
+else
+{
+    Console.WriteLine("r2 failed.");
+}
+if (TryDivide(10, 4, out double r3))
+{
+    Console.WriteLine($"10 / 4 = {r3}");
+}
+else
+{
+    Console.WriteLine("r3 failed.");
+}
+
+Console.WriteLine($"第十二节 end");
+
 public interface IShape
 {
     string Name { get; } // 只要求能读，形状的名字不需要外部改
