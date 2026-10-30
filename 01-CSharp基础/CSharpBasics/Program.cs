@@ -90,6 +90,95 @@ foreach (var vehicle in vehicles)
 
 Console.WriteLine($"第十节 end");
 
+Console.WriteLine($"第十一节 start");
+var shapes = new List<IShape>
+{
+    new Circle(2),
+    new Square(3),
+    new Triangle(3, 4)
+};
+foreach (IShape shape in shapes)
+{
+    Console.WriteLine($"Shape: {shape.Name}, Area: {shape.Area():F2}");
+}
+var printables = new List<IPrintable>
+{
+    new Circle(5),
+    new Square(4)
+};
+foreach (IPrintable printable in printables)
+{
+    printable.Print();
+}
+Console.WriteLine($"第十一节 end");
+
+public interface IShape
+{
+    string Name { get; } // 只要求能读，形状的名字不需要外部改
+    double Area(); // 只要求能算
+}
+public interface IPrintable
+{
+    void Print();
+}
+public class Circle : IShape, IPrintable
+{
+    public string Name
+    {
+        get { return "Circle"; }
+    }
+    public double Radius { get; set; }
+    public Circle(double radius)
+    {
+        Radius = radius;
+    }
+    public double Area()
+    {
+        return Math.PI * Radius * Radius;
+    }
+    public void Print()
+    {
+        Console.WriteLine($"Circle with radius: {Radius}, Area: {Area():F2}");
+    }
+}
+public class Square : IShape, IPrintable
+{
+    public string Name
+    {
+        get { return "Square"; }
+    }
+    public double SideLength { get; set; }
+    public Square(double sideLength)
+    {
+        SideLength = sideLength;
+    }
+    public double Area()
+    {
+        return SideLength * SideLength;
+    }
+    public void Print()
+    {
+        Console.WriteLine($"Square with side length: {SideLength}, Area: {Area():F2}");
+    }
+}
+public class Triangle : IShape
+{
+    public string Name
+    {
+        get { return "Triangle"; }
+    }
+    public double BaseLength { get; set; }
+    public double Height { get; set; }
+    public Triangle(double baseLength, double height)
+    {
+        BaseLength = baseLength;
+        Height = height;
+    }
+    public double Area()
+    {
+        return 0.5 * BaseLength * Height;
+    }
+}
 public class Person
 {
     public string Name { get; set; }
