@@ -35,6 +35,9 @@ while (true)
         case "5":
             UpdateTransaction();
             break;
+        case "6":
+            ledger.ShowMonthlyStats();
+            break;
         default:
             Console.WriteLine("无效的选择，请重新输入或输入0退出。");
             break;
