@@ -1,58 +1,52 @@
-MathOp add = (x, y) => x + y;
-MathOp multiply = (x, y) => x * y;
-Console.WriteLine($"Add: {add(5, 10)}"); // Output: Add: 15
-Console.WriteLine($"Multiply: {multiply(5, 10)}"); // Output: Multiply: 50
+List<int> numbers = new List<int> { 5, 2, 8, 1, 9, 4 };
+numbers.Sort((a, b) => a - b);
+Console.WriteLine("Sorted numbers: " + string.Join(", ", numbers));
 
-Action<string> log = message => Console.WriteLine($"[LOG] {message}");
-log("Application started."); // Output: [LOG] Application started.
+var evens = numbers.FindAll(n => n % 2 == 0);
+Console.WriteLine("Even numbers: " + string.Join(", ", evens));
 
-Func<int, int, int> sub = (x, y) => x - y;
-Console.WriteLine($"Subtract: {sub(10, 5)}"); // Output: Subtract: 5
+int threshold = 4;
+var big = numbers.FindAll(n => n > threshold);
+Console.WriteLine($"Numbers greater than {threshold}: " + string.Join(", ", big));
 
-Predicate<int> isEven = number => number % 2 == 0;
-Console.WriteLine($"Is 4 even? {isEven(4)}"); // Output: Is 4 even? True
+Func<int, int> square = x => x * x;
+Console.WriteLine(square(6));
 
-//多播：一个委托变量可以绑定多个方法，按+=的顺序执行
-Action<string> pipeline = log;
-pipeline += message => Console.WriteLine($"[FILE] {message}");
-pipeline("Save Successful.");
-
-var counter = new Counter();
-counter.Reached += count => Console.WriteLine($"Count reached: {count}");
-counter.Finished += () => Console.WriteLine("数完了");
-for (int i = 0; i < 10; i++)
+Func<int, int, int> max = (a, b) =>
 {
-    counter.Add();
+    int result = a > b ? a : b;
+    return result;
+};
+Console.WriteLine(max(3, 7));
+
+var forActions = new List<Action>();
+for (int i = 0; i < 3; i++)
+{
+    forActions.Add(() => Console.WriteLine($"forActions Action {i} executed."));
 }
+foreach (var action in forActions) action();
+
+var foreachActions = new List<Action>();
+foreach (int n in new[] {0, 1, 2})
+{
+    foreachActions.Add(() => Console.WriteLine($"foreachActions Action {n} executed."));
+}
+foreach (var action in foreachActions) action();
 
 Console.WriteLine("动手任务：");
-Notify notify = message => Console.WriteLine($"[1] {message}");
-notify += message => Console.WriteLine($"[2] {message}");
-notify("你好");
+List<string> strs = new List<string> { "apple", "kiwi", "banana", "fig" };
+strs.Sort((a, b) => a.Length - b.Length);
+Console.WriteLine("Strings: " + string.Join(", ", strs));
 
-Func<decimal, decimal> discount = price => price * 0.8m;
-Console.WriteLine(discount(100m));   // 80.0
+Func<int, bool> isRuNian = year => (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+Console.WriteLine("Is 2024 a leap year? " + isRuNian(2024));
+Console.WriteLine("Is 1900 a leap year? " + isRuNian(1900));
+Console.WriteLine("Is 2000 a leap year? " + isRuNian(2000));
 
-public delegate int MathOp(int a, int b);
-public delegate void Notify(string message);
-
-public class Counter
+var copyActions = new List<Action>();
+for (int i = 0; i < 3; i++)
 {
-    public event Action<int>? Reached;
-    public event Action? Finished;
-
-    private int _count;
-    public void Add()
-    {
-        _count++;
-        if (_count % 5 == 0)
-        {
-            Reached?.Invoke(_count);
-        }
-        if (_count == 10)
-        {
-            Finished?.Invoke();
-        }
-    }
-    
+    int copy = i;
+    copyActions.Add(() => Console.WriteLine($"copyActions Action of copy {copy} executed."));
 }
+foreach (var action in copyActions) action();
