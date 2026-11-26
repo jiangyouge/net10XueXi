@@ -1,56 +1,58 @@
-T Max<T>(T a, T b) where T : IComparable<T>
+MathOp add = (x, y) => x + y;
+MathOp multiply = (x, y) => x * y;
+Console.WriteLine($"Add: {add(5, 10)}"); // Output: Add: 15
+Console.WriteLine($"Multiply: {multiply(5, 10)}"); // Output: Multiply: 50
+
+Action<string> log = message => Console.WriteLine($"[LOG] {message}");
+log("Application started."); // Output: [LOG] Application started.
+
+Func<int, int, int> sub = (x, y) => x - y;
+Console.WriteLine($"Subtract: {sub(10, 5)}"); // Output: Subtract: 5
+
+Predicate<int> isEven = number => number % 2 == 0;
+Console.WriteLine($"Is 4 even? {isEven(4)}"); // Output: Is 4 even? True
+
+//多播：一个委托变量可以绑定多个方法，按+=的顺序执行
+Action<string> pipeline = log;
+pipeline += message => Console.WriteLine($"[FILE] {message}");
+pipeline("Save Successful.");
+
+var counter = new Counter();
+counter.Reached += count => Console.WriteLine($"Count reached: {count}");
+counter.Finished += () => Console.WriteLine("数完了");
+for (int i = 0; i < 10; i++)
 {
-    return a.CompareTo(b) > 0 ? a : b;
+    counter.Add();
 }
 
-Console.WriteLine("比大小：");
-Console.WriteLine(Max(3, 5)); // Output: 5
-Console.WriteLine(Max(1.5, 2.5)); // Output: 2.5
-Console.WriteLine(Max("apple", "banana")); // Output: banana
-
-void PrintAll<T>(IEnumerable<T> items)
-{
-    Console.WriteLine(string.Join(", ", items));
-}
-
-PrintAll(new List<int> { 1, 2, 3 }); // Output: 1, 2, 3
-PrintAll(new List<string> { "apple", "banana" }); // Output: apple, banana
-
-var intBox = new Box<int>(42);
-var textBox = new Box<string>("Hello, Generics!");
-Console.WriteLine(intBox); // Output: Box containing: 42
-Console.WriteLine(textBox); // Output: Box containing: Hello, Generics!
-Console.WriteLine(intBox.Value + 8); // Output: 50
-
-//动手任务
 Console.WriteLine("动手任务：");
-T FirstOr<T>(List<T> items, T fallback)
-{
-    if (items.Count > 0)
-    {
-        return items[0];
-    }
-    else
-    {
-        return fallback;
-    }
-}
-Console.WriteLine(FirstOr(new List<int> { 1, 2, 3 }, -1)); // Output: 1
-Console.WriteLine(FirstOr(new List<string>(), "default")); // Output: default
-var intBox2 = new Box<List<string>>(["apple", "banana"]);
-Console.WriteLine(string.Join(", ", intBox2.Value)); // Output: apple, banana
-Console.WriteLine(intBox2.Value.Count); // Output: 2
+Notify notify = message => Console.WriteLine($"[1] {message}");
+notify += message => Console.WriteLine($"[2] {message}");
+notify("你好");
 
+Func<decimal, decimal> discount = price => price * 0.8m;
+Console.WriteLine(discount(100m));   // 80.0
 
-public class Box<T>
+public delegate int MathOp(int a, int b);
+public delegate void Notify(string message);
+
+public class Counter
 {
-    public T Value { get; set; }
-    public Box(T value)
+    public event Action<int>? Reached;
+    public event Action? Finished;
+
+    private int _count;
+    public void Add()
     {
-        Value = value;
+        _count++;
+        if (_count % 5 == 0)
+        {
+            Reached?.Invoke(_count);
+        }
+        if (_count == 10)
+        {
+            Finished?.Invoke();
+        }
     }
-    public override string ToString()
-    {
-        return $"Box containing: {Value}";
-    }
+    
 }
